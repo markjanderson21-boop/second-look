@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Your Retirement Checkup — Second Look{% endblock %}
+{% block content %}
+<span class="step-tag">Step 2 of 2 — Your results</span>
+<h1>Your retirement checkup</h1>
+
+{% if demo %}
+<div class="demo-banner">
+  👀 <strong>Sample report.</strong> This shows what a finished checkup looks like.
+  Connect an AI key to analyze real statements.
+</div>
+{% endif %}
+
+<div class="summary-box">
+  <div class="summary-row"><span>Account</span><strong>{{ data.account_type or "Retirement account" }}</strong></div>
+  <div class="summary-row"><span>We looked at</span><strong>${{ "%.0f"|format(total) }}</strong></div>
+  <div class="summary-row"><span>What you're paying per year</span><strong>{{ "%.2f"|format(w_er) }}% (about ${{ "%.0f"|format(yearly) }})</strong></div>
+  {% if data.as_of_date %}<div class="summary-row"><span>Statement date</span><strong>{{ data.as_of_date }}</strong></div>{% endif %}
+</div>
+
+<h2>What we found</h2>
+{% for f in flags %}
+<div class="flag flag-{{ f.level }}">
+  <span class="level">{% if f.level == "good" %}Looks good{% elif f.level == "watch" %}Worth a look{% else %}Needs attention{% endif %}</span>
+  <h3>{{ f.title }}</h3>
+  <p>{{ f.detail }}</p>
+  <p class="meaning"><strong>What this means:</strong> {{ f.meaning }}</p>
+</div>
+{% endfor %}
+
+<h2>Where your money sits</h2>
+<div class="summary-box">
+  {% for h in holdings %}
+  <div class="summary-row">
+    <span>{{ h.name }}</span>
+    <strong>${{ "%.0f"|format(h.value or 0) }}</strong>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="cta-box">
+  <h2>Want a human to double-check this?</h2>
+  <p>A 15-minute conversation with {{ advisor_name }}. He'll review your checkup
+  with you and answer your questions — no pressure, no jargon.</p>
+  <a class="btn" href="/talk">Talk with {{ advisor_name.split(' ')[0] }} →</a>
+</div>
+{% endblock %}

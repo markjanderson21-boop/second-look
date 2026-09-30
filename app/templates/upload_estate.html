@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Organize My Estate Documents — Second Look{% endblock %}
+{% block content %}
+<span class="step-tag">Step 1 of 2</span>
+<h1>Organize my estate documents</h1>
+<p class="lead">Upload your will, trust, power of attorney — whatever you have —
+and we'll sort it out and flag what's missing or out of date.</p>
+
+<form action="/checkup/estate" method="post" enctype="multipart/form-data">
+  <label class="file-btn" for="documents">
+    🗂️ &nbsp;Choose your documents (PDFs)
+    <small>You can select more than one file at a time. Don't worry if you're
+    missing something — that's exactly what we check for.</small>
+    <input type="file" id="documents" name="documents" accept=".pdf,application/pdf" multiple required>
+  </label>
+  <p class="file-name" id="file-name"></p>
+  <button class="btn" type="submit">Organize my documents →</button>
+</form>
+
+<div class="reassure">
+  🔒 <strong>Your documents stay private.</strong> They're used only to create your
+  organizer and are never shared or sold.
+</div>
+
+<script>
+document.getElementById('documents').addEventListener('change', function(e) {
+  var n = e.target.files.length;
+  document.getElementById('file-name').textContent =
+    n ? n + (n === 1 ? ' file selected' : ' files selected') : '';
+});
+</script>
+{% endblock %}

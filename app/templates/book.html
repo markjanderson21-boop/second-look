@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Talk with {{ advisor_name }} — Second Look{% endblock %}
+{% block content %}
+<h1>Talk with {{ advisor_name }}</h1>
+<p class="lead">A short, friendly conversation about your checkup.
+Bring your questions — that's what this is for.</p>
+
+<div class="cta-box">
+  <h2>Ready when you are</h2>
+  {% if booking_url %}
+  <p>Pick a time that works for you:</p>
+  <a class="btn" href="{{ booking_url }}">Book a time online →</a>
+  {% endif %}
+  {% if advisor_phone %}
+  <p>Or just call:</p>
+  <a class="btn btn-secondary" href="tel:{{ advisor_phone }}">📞 {{ advisor_phone }}</a>
+  {% endif %}
+  {% if not booking_url and not advisor_phone %}
+  <p>Online booking and a phone number will appear here once they're set up.
+  (The advisor adds these in the app's settings.)</p>
+  {% endif %}
+</div>
+
+<h2>What happens next</h2>
+<ol class="steps">
+  <li><strong>You pick a time</strong> — or just call. Fifteen minutes is plenty.</li>
+  <li><strong>You talk through your checkup</strong> — what's fine, what isn't, and what to do about it.</li>
+  <li><strong>You decide</strong> — there's no obligation. The checkup is yours to keep either way.</li>
+</ol>
+{% endblock %}

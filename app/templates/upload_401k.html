@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Check My Retirement Account — Second Look{% endblock %}
+{% block content %}
+<span class="step-tag">Step 1 of 2</span>
+<h1>Check my retirement account</h1>
+<p class="lead">Upload your most recent retirement statement and we'll give it
+a careful read — fees, investments, and anything worth a second look.</p>
+
+<form action="/checkup/retirement" method="post" enctype="multipart/form-data">
+  <label class="file-btn" for="statement">
+    📄 &nbsp;Choose your statement (PDF)
+    <small>Your 401(k), 403(b), or IRA statement — the PDF from your provider works best.</small>
+    <input type="file" id="statement" name="statement" accept=".pdf,application/pdf" required>
+  </label>
+  <p class="file-name" id="file-name"></p>
+  <button class="btn" type="submit">Review my statement →</button>
+</form>
+
+<div class="reassure">
+  🔒 <strong>Your statement stays private.</strong> It's used only to create your
+  checkup and is never shared or sold.
+</div>
+
+<script>
+document.getElementById('statement').addEventListener('change', function(e) {
+  var n = e.target.files.length ? e.target.files[0].name : '';
+  document.getElementById('file-name').textContent = n ? 'Selected: ' + n : '';
+});
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Is your retirement on track?</h1>
+<p class="lead">Upload a statement. Get straight answers in plain English.
+No jargon, no account needed, no cost.</p>
+
+<div class="choice-grid">
+  <a class="choice-card" href="/checkup/retirement">
+    <span class="emoji">📄</span>
+    <h3>Check my retirement account</h3>
+    <p>We look at what you're paying in fees, where your money sits,
+    and what might need attention.</p>
+  </a>
+  <a class="choice-card" href="/checkup/estate">
+    <span class="emoji">🗂️</span>
+    <h3>Organize my estate documents</h3>
+    <p>We sort your will, trust, and related papers, and flag what's
+    missing or out of date.</p>
+  </a>
+</div>
+
+<h2>How it works</h2>
+<ol class="steps">
+  <li><strong>Upload your documents.</strong> Just the PDFs — nothing to fill out.</li>
+  <li><strong>We do the reading.</strong> Our system reviews the fine print for you.</li>
+  <li><strong>You get straight answers.</strong> A simple report: what's fine, what to watch, what to ask about.</li>
+</ol>
+
+<div class="reassure">
+  🔒 <strong>Private by design.</strong> No account, no password, no email required.
+  Your documents are used only to build your checkup.
+</div>
+{% endblock %}

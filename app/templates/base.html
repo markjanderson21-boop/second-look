@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Second Look — A Free Retirement &amp; Estate Checkup{% endblock %}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <span class="logo"><a href="/" style="color:#fff;text-decoration:none;">Second Look</a></span>
+    <span class="tagline">A free retirement &amp; estate checkup, in plain English</span>
+  </div>
+</header>
+<main class="wrap">
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap footer">
+  <p><strong>Please read:</strong> Second Look provides educational information only.
+  It is not financial, investment, tax, or legal advice, and it is not a recommendation
+  to buy, sell, or change anything. For advice about your own situation, talk with a
+  qualified professional.</p>
+  <p>Your documents are used only to create your checkup. They are not shared or sold.</p>
+</footer>
+</body>
+</html>

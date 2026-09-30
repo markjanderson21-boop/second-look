@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Your Estate Document Organizer — Second Look{% endblock %}
+{% block content %}
+<span class="step-tag">Step 2 of 2 — Your results</span>
+<h1>Your estate document organizer</h1>
+
+{% if demo %}
+<div class="demo-banner">
+  👀 <strong>Sample report.</strong> This shows what a finished organizer looks like.
+  Connect an AI key to analyze your real documents.
+</div>
+{% endif %}
+
+<h2>What we found</h2>
+<div class="summary-box">
+  {% for d in docs %}
+  <div class="summary-row">
+    <span>{{ d.label }}{% if d.signed_date %} <em>({{ d.signed_date }})</em>{% endif %}</span>
+    <strong>{{ d.filename }}</strong>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Your checklist</h2>
+<ul class="check">
+{% for c in checklist %}
+  <li class="{{ c.status }}">
+    <span class="icon">{% if c.status == "ok" %}✅{% elif c.status == "missing" %}❌{% elif c.status == "stale" %}🕰️{% else %}⚠️{% endif %}</span>
+    <strong>{{ c.title }}</strong>
+    <p>{{ c.detail }}</p>
+    {% if c.action %}<p class="action">{{ c.action }}</p>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+<div class="cta-box">
+  <h2>Estate paperwork is confusing. You don't have to sort it alone.</h2>
+  <p>Talk with {{ advisor_name }} — he'll walk through your checklist with you
+  and help you figure out the next step.</p>
+  <a class="btn" href="/talk">Talk with {{ advisor_name.split(' ')[0] }} →</a>
+</div>
+{% endblock %}
