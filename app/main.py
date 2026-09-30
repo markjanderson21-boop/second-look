@@ -61,10 +61,13 @@ def retirement_form(request: Request):
 
 @app.post("/checkup/retirement", response_class=HTMLResponse)
 async def retirement_report(request: Request,
-                            statement: UploadFile = File(...)):
-    path = _save(statement)
-    text = extract_text(str(path))
-    path.unlink(missing_ok=True)
+                            statement: UploadFile | None = File(None)):
+    if statement is not None and (statement.filename or "").strip():
+        path = _save(statement)
+        text = extract_text(str(path))
+        path.unlink(missing_ok=True)
+    else:
+        text = ""
     data, demo = analyze_401k(text)
     flags = check_401k(data)
     holdings = data.get("holdings", [])
@@ -83,14 +86,14 @@ def estate_form(request: Request):
 
 @app.post("/checkup/estate", response_class=HTMLResponse)
 async def estate_report(request: Request,
-                        documents: list[UploadFile] = File(...)):
+                        documents: list[UploadFile] | None = File(None)):
     docs = []
     any_demo = demo_mode()
     if any_demo:
         # Demo mode: show a finished sample report; uploaded files are ignored.
         docs = demo_estate_docs()
     else:
-        for upload in documents:
+        for upload in (documents or []):
             if not (upload.filename or "").strip():
                 continue
             path = _save(upload)
